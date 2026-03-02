@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双色球模拟选号器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎱 双色球模拟选号器</h1>
+            <p class="subtitle">幸运号码，一键生成</p>
+        </header>
+
+        <main>
+            <div class="balls-display">
+                <div class="red-balls">
+                    <h3>红球 (1-33 选 6)</h3>
+                    <div id="redBalls" class="balls-container">
+                        <div class="ball red-ball placeholder">?</div>
+                        <div class="ball red-ball placeholder">?</div>
+                        <div class="ball red-ball placeholder">?</div>
+                        <div class="ball red-ball placeholder">?</div>
+                        <div class="ball red-ball placeholder">?</div>
+                        <div class="ball red-ball placeholder">?</div>
+                    </div>
+                </div>
+                
+                <div class="blue-ball">
+                    <h3>蓝球 (1-16 选 1)</h3>
+                    <div id="blueBall" class="balls-container">
+                        <div class="ball blue-ball-single placeholder">?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="generateBtn" class="btn-primary">
+                    <span class="btn-icon">🎲</span>
+                    随机选号
+                </button>
+                <button id="luckyBtn" class="btn-secondary">
+                    <span class="btn-icon">✨</span>
+                    幸运选号
+                </button>
+            </div>
+
+            <div class="history-section">
+                <h3>📋 选号记录</h3>
+                <div id="historyList" class="history-list">
+                    <p class="empty-tip">暂无选号记录</p>
+                </div>
+                <button id="clearBtn" class="btn-text">清空记录</button>
+            </div>
+
+            <div class="rules-section">
+                <h3>📖 游戏规则</h3>
+                <div class="rules-content">
+                    <p><strong>红球：</strong>从 1-33 中选择 6 个号码（不重复）</p>
+                    <p><strong>蓝球：</strong>从 1-16 中选择 1 个号码</p>
+                    <p><strong>中奖规则：</strong>每周二、四、日开奖</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2026 双色球模拟选号器 | 仅供娱乐</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
