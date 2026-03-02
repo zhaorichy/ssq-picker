@@ -18,10 +18,6 @@ class SSQPicker {
             this.generateRandom();
         });
 
-        document.getElementById('luckyBtn').addEventListener('click', () => {
-            this.generateLucky();
-        });
-
         document.getElementById('clearBtn').addEventListener('click', () => {
             this.clearHistory();
         });
@@ -36,34 +32,7 @@ class SSQPicker {
             this.blueBall = this.generateUniqueNumbers(1, 1, 16)[0];
             
             this.displayBalls();
-            this.addToHistory('随机');
-        });
-    }
-
-    // 生成幸运号码（带一些趣味性）
-    generateLucky() {
-        this.animateBalls(() => {
-            // 幸运模式：优先选择常见"幸运数字"
-            const luckyNumbers = [6, 8, 9, 16, 18, 19, 26, 28, 29, 33];
-            const pool = [...luckyNumbers];
-            
-            // 从幸运数字中选3个
-            const luckyRed = [];
-            for (let i = 0; i < 3 && pool.length > 0; i++) {
-                const idx = Math.floor(Math.random() * pool.length);
-                luckyRed.push(pool.splice(idx, 1)[0]);
-            }
-            
-            // 剩余3个从全部红球中选（排除已选的）
-            const remaining = this.generateUniqueNumbersFromRange(3, 1, 33, luckyRed);
-            this.redBalls = [...luckyRed, ...remaining].sort((a, b) => a - b);
-            
-            // 蓝球也优先幸运数字
-            const luckyBlue = [6, 8, 9, 16];
-            this.blueBall = luckyBlue[Math.floor(Math.random() * luckyBlue.length)];
-            
-            this.displayBalls();
-            this.addToHistory('幸运');
+            this.addToHistory();
         });
     }
 
@@ -73,18 +42,6 @@ class SSQPicker {
         while (numbers.length < count) {
             const num = Math.floor(Math.random() * (max - min + 1)) + min;
             if (!numbers.includes(num)) {
-                numbers.push(num);
-            }
-        }
-        return numbers.sort((a, b) => a - b);
-    }
-
-    // 从指定范围生成不重复随机数（排除某些数字）
-    generateUniqueNumbersFromRange(count, min, max, exclude) {
-        const numbers = [];
-        while (numbers.length < count) {
-            const num = Math.floor(Math.random() * (max - min + 1)) + min;
-            if (!numbers.includes(num) && !exclude.includes(num)) {
                 numbers.push(num);
             }
         }
@@ -129,11 +86,10 @@ class SSQPicker {
     }
 
     // 添加到历史记录
-    addToHistory(type) {
+    addToHistory() {
         const record = {
             redBalls: [...this.redBalls],
             blueBall: this.blueBall,
-            type: type,
             time: new Date().toLocaleString('zh-CN', {
                 month: '2-digit',
                 day: '2-digit',
@@ -160,7 +116,7 @@ class SSQPicker {
             return;
         }
         
-        container.innerHTML = this.history.map((record, index) => `
+        container.innerHTML = this.history.map((record) => `
             <div class="history-item">
                 <div class="history-balls">
                     ${record.redBalls.map(num => 
